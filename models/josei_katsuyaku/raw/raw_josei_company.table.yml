@@ -6,3 +6,7 @@ description: '女性の活躍推進企業データベースの企業別生デー
 annotations:
   queria:
     published: false
+fields:
+  - name: corporate_number
+    title: 法人番号
+    annotations: { queria: { semantic: { role: entity, name: corporate_number } } }

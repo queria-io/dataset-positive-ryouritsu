@@ -1,0 +1,6 @@
+schema: josei_katsuyaku
+name: stg_josei_company
+description: 女性の活躍推進企業データベースの企業別データの型変換。公開用のテーブルは company。
+annotations:
+  queria:
+    published: false
