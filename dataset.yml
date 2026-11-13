@@ -1,0 +1,62 @@
+# この dataset.yml は fdl commit が読む（FDL の dataset.json を YAML で書いたもの）。
+# 表の説明は models/ の *.table.yml に書く。表と列の型・NULL・行数は fdl commit がカタログから埋める。
+# Queria だけの項目（テーマ・カバー・AI 向けの説明・列の意味）は annotations.queria に書く。
+name: positive_ryouritsu
+title: 女性の活躍推進企業データベース
+description: |-
+  企業が女性の活躍推進企業データベースに公表した、女性管理職割合・男女の賃金の差異・育児休業取得率などの女性活躍・両立支援の指標です。1 行が 1 企業で、法人番号で他のデータセットと結合できます。
+
+  出典：厚生労働省「女性の活躍推進企業データベース」を加工して作成。
+keywords:
+  - 女性活躍
+  - 女性活躍推進法
+  - 両立支援
+  - 次世代育成支援対策推進法
+  - えるぼし
+  - くるみん
+  - 男女の賃金の差異
+  - 女性管理職
+  - 育児休業
+  - 人的資本
+  - ESG
+  - 法人番号
+  - 厚生労働省
+homepage: https://github.com/queria-io/dataset-positive-ryouritsu
+language: ja
+
+licenses:
+  - JP-PDL-1.0
+
+sources:
+  - title: 女性の活躍推進企業データベース オープンデータ
+    path: https://positive-ryouritsu.mhlw.go.jp/positivedb/opendata/
+
+contributors:
+  - title: 厚生労働省
+    path: https://www.mhlw.go.jp/
+    roles: [rightsHolder]
+
+spatial_coverage: [JP]
+update_frequency: irregular
+
+schemas:
+  - name: josei_katsuyaku
+    title: 女性活躍推進企業
+
+annotations:
+  queria:
+    themes: [labour]
+    cover: 👩‍💼
+    ai_context:
+      instructions: |
+        企業の女性活躍・両立支援の指標（女性管理職割合、男女の賃金の差異、育児休業取得率など）を見る用途に使う。
+        josei_katsuyaku.company は企業の任意公表なので、開示していない企業の列は NULL になる。
+        「NULL＝0」ではない。育児休業取得率は雇用管理区分ごとに公表されるが、
+        先頭区分の代表値だけを収録している。
+        法人番号（corporate_number）で houjin_bangou / gbizinfo と結合できる。
+        法人番号は未公表の企業があり、一部に重複もある。
+      synonyms: [女性活躍推進, えるぼし, くるみん, 男女の賃金の差異, 女性管理職比率]
+      examples:
+        - 女性管理職割合が高い企業を業種ごとに出したい
+        - 上場企業の男女の賃金の差異を比べたい
+        - 男性の育児休業取得率を公表している企業を数えたい
