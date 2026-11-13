@@ -7,6 +7,7 @@
 ホストランナーは US にあるため、Actions の Sync（`.github/workflows/sync.yml`、`main` への push と
 手動実行で動く）では `josei.py` が `GeoBlocked` を送出し、`main.py` が `JOSEI_KEEP_PREVIOUS` を立てる。
 `raw_josei_company` はそのとき前回のバージョンの行をそのまま引き継ぎ、記述だけが新しくなる。
+引き継ぐバージョンが無いと Sync は失敗するので、最初のバージョンは日本国内から公開する。
 
 データを新しくするときは、日本国内から次のスクリプトで公開する。
 `queria login` 済みならトークンは要らない（ログインしていない環境では `FDL_TOKEN` に
