@@ -1,0 +1,26 @@
+name: Sync
+
+# 取得元は日本国外からのアクセスを 403 で弾くので、Actions では前回の値を引き継いで
+# 記述だけを公開し直す。データを新しくするときは日本国内から scripts/sync-local.sh を流す (MAINTAINING.md)
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "*.md"
+  workflow_dispatch:
+
+concurrency:
+  group: sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    # Queria への書き込みは GitHub Actions の OIDC で 1 時間のトークンを取って行う
+    permissions:
+      contents: read
+      id-token: write
+    uses: queria-io/dataset-shared/.github/workflows/sync.yml@47c67df0f7731174b0999ead76873c53b8905ca2
+    with:
+      dataset_name: positive_ryouritsu
+    secrets:
+      DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}

@@ -1,0 +1,22 @@
+name: "positive_ryouritsu"
+version: "1.0.0"
+
+profile: "positive_ryouritsu"
+
+model-paths: ["models"]
+macro-paths: ["shared/macros"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  positive_ryouritsu:
+    +database: positive_ryouritsu
+    josei_katsuyaku:
+      raw:
+        +materialized: table
+      stg:
+        +materialized: view
+      mart:
+        +materialized: table
